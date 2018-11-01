@@ -1,0 +1,46 @@
+sudo: required
+services:
+  - docker
+language: php
+php:
+  - '7.0'
+  - '7.1'
+  - '7.2'
+
+before_install:
+  - echo "------------> before install"
+  - pwd
+  - ./build
+  - cat distribution/cans.conf
+  - cat distribution/docker-compose.yml
+
+install:
+  - echo "------------> install"
+  - pwd
+  - composer install
+  - ./bin/cans
+  - ./bin/cans init
+  - cat ./cans.conf
+  - cat ./docker-compose.yml
+
+script:
+  - echo "------------> script"
+  - cd tests
+  - pwd
+  - composer install
+  - vendor/bin/cans
+  - vendor/bin/cans init
+  - cat ./cans.conf
+  - cat ./docker-compose.yml
+  - echo "------------> testing"
+  - vendor/bin/cans run php-cli
+  - vendor/bin/cans up -d
+  - vendor/bin/cans down
+
+
+notifications:
+  email:
+    recipients:
+      - inputx@gmail.com
+    on_success: change # default: change
+    on_failure: always # default: always
