@@ -1,0 +1,36 @@
+{
+  "name": "agilekeys/cans",
+  "description": "Local development environment based on docker images",
+  "keywords": [
+    "local",
+    "development",
+    "environment",
+    "dev",
+    "docker"
+  ],
+  "authors": [
+    {"name": "Duan Li", "email": "inputx@gmail.com"}
+  ],
+  "require": {
+    "php": "^7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "CansDemo\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CansDemo\\Tests\\": "tests/"
+    }
+  },
+  "bin": [
+    "bin/cans"
+  ],
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}

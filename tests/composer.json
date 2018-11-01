@@ -1,0 +1,14 @@
+{
+	"repositories": [
+		{
+          "url": "https://github.com/agilekeys/cans.git",
+          "type": "git"
+
+		}
+	],
+	"require": {
+		"php": "^7.2",
+		"agilekeys/cans": "dev-master"
+	}
+}
+

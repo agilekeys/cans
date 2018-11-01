@@ -1,0 +1,9 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+# build composer compose yml file distribution
+cp ${SCRIPT_DIR}/docker-compose.yml ${SCRIPT_DIR}/distribution/docker-compose.yml.dist
+
+# build cans config file distribution
+cp ${SCRIPT_DIR}/cans.conf ${SCRIPT_DIR}/distribution/cans.conf.dist

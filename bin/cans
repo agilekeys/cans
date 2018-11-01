@@ -1,0 +1,77 @@
+#!/bin/bash
+
+usage="
+$(basename "$0") [argument] [option]
+
+Arguments:
+    down  To shutdown local server.
+    help  To display help infomation.
+    init  To create config file and initial 'docker-compose.yml' file
+    run  To run single container, name will be listed on 'docker-compose.yml' file
+    up  Run all containers as server (with -d, will run on background)
+
+    "
+
+PWD_DIR="${PWD}"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+# load local config file if exist
+if [ -f "${PWD_DIR}/cans.conf" ]; then
+    source "${PWD_DIR}/cans.conf"
+fi
+
+# check env like docker docker-compose
+func_check_env() {
+    if [ ! -x "$(command -v docker)" ]; then
+        echo "Could not find docker cli, please check."
+        exit
+    fi
+
+    if [ ! -x "$(command -v docker-compose)" ]; then
+        echo "Could not find docker-compose cli, please check."
+        exit
+    fi
+} 
+
+# create config file
+func_initial_config_file () {
+    if [ -f "${PWD_DIR}/cans.conf" ]; then
+        echo "'cans.conf' is exist"
+    else 
+        cp ${SCRIPT_DIR}/../agilekeys/cans/distribution/cans.conf.dist ${PWD_DIR}/cans.conf
+    fi
+}
+# copy yml file
+func_copy_docker_compose_yml_file() {
+    if [ -f "${PWD_DIR}/docker-compose.yml" ]; then
+        echo "'docker-compose.yml' is exist"
+    else 
+        cp ${SCRIPT_DIR}/../agilekeys/cans/distribution/cans.conf.dist ${PWD_DIR}/docker-compose.yml
+    fi
+}
+
+
+# display help
+func_display_help() {
+    echo "$usage"
+}
+
+
+func_check_env
+if [[ $@ == help* ]] || [[ -z $@ ]]
+    then
+    func_display_help
+    exit
+elif [[ $@ == init* ]]
+    then
+    func_initial_config_file
+    func_copy_docker_compose_yml_file
+elif [[ $@ == run* ]]
+    then
+    CMD="$@"
+    SRC="run"
+    REP=""
+    docker-compose -f ${DOCKER_COMPOSE_YML_FILE} run ${DOCKER_CLI_OPTIONS} ${CMD/$SRC/$REP}
+else
+    docker-compose -f ${DOCKER_COMPOSE_YML_FILE} "$@"
+fi
