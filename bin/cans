@@ -38,7 +38,7 @@ func_initial_config_file () {
     if [ -f "${PWD_DIR}/cans.conf" ]; then
         echo "'cans.conf' is exist"
     else 
-        cp ${SCRIPT_DIR}/../agilekeys/cans/distribution/cans.conf.dist ${PWD_DIR}/cans.conf
+        cp "${SCRIPT_DIR}/../agilekeys/cans/distribution/cans.conf.dist" "${PWD_DIR}/cans.conf"
     fi
 }
 # copy yml file
@@ -46,7 +46,7 @@ func_copy_docker_compose_yml_file() {
     if [ -f "${PWD_DIR}/docker-compose.yml" ]; then
         echo "'docker-compose.yml' is exist"
     else 
-        cp ${SCRIPT_DIR}/../agilekeys/cans/distribution/docker-compose.yml.dist ${PWD_DIR}/docker-compose.yml
+        cp "${SCRIPT_DIR}/../agilekeys/cans/distribution/docker-compose.yml.dist" "${PWD_DIR}/docker-compose.yml"
     fi
 }
 
