@@ -11,8 +11,8 @@ before_install:
   - echo "------------> before install"
   - pwd
   - ./build
-  - cat distribution/cans.conf
-  - cat distribution/docker-compose.yml
+  - cat distribution/cans.conf.dist
+  - cat distribution/docker-compose.yml.dist
 
 install:
   - echo "------------> install"
