@@ -35,6 +35,7 @@ script:
   - echo "------------> testing"
   - vendor/bin/cans run php-cli
   - vendor/bin/cans up -d
+  - curl http://0.0.0.0:8000/src
   - vendor/bin/cans down
 
 
