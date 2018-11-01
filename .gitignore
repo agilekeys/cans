@@ -1,0 +1,4 @@
+
+tests/cans.conf
+tests/composer.lock
+tests/docker-compose.yml
